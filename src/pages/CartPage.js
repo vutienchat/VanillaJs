@@ -3,10 +3,10 @@ import ListCart from "../components/ListCart.js";
 import { reRender } from "../utils.js";
 const CartPage = {
     async render() {
-        window.scrollTo({ top: 0,left: 0 ,behavior: 'smooth' })
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
         let carts = localStorage.getItem('carts')
         carts = carts == null ? [] : JSON.parse(carts)
-        if(carts.length > 0){
+        if (carts.length > 0) {
             return /*html*/ `
             <div class="container md:px-10 fade">
            <div class="my-5">
@@ -38,13 +38,13 @@ const CartPage = {
            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                <div class="">
                    <form id="thong_tin_kh">
-                       <input class="w-full md:w-10/12 p-2 my-4 border focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-70 focus:border-blue-400 transition duration-300" id="ho_ten" value="" required placeholder="Họ và Tên"
+                       <input class="w-full md:w-10/12 p-2 my-4 border focus:outline-none focus:ring focus:ring-blue-300  focus:border-blue-400 transition duration-300" id="ho_ten" value="" required placeholder="Họ và Tên"
                            type="text">
-                       <input class="w-full md:w-10/12 p-2 my-4 border focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-70 focus:border-blue-400 transition duration-300" id="dia_chi" value="" required placeholder="Địa chỉ giao hàng"
+                       <input class="w-full md:w-10/12 p-2 my-4 border focus:outline-none focus:ring focus:ring-blue-300  focus:border-blue-400 transition duration-300" id="dia_chi" value="" required placeholder="Địa chỉ giao hàng"
                            type="text">
-                       <input class="w-full md:w-10/12 p-2 my-4 border focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-70 focus:border-blue-400 transition duration-300" id="sdt" value="" required placeholder="số điện thoại"
+                       <input class="w-full md:w-10/12 p-2 my-4 border focus:outline-none focus:ring focus:ring-blue-300  focus:border-blue-400 transition duration-300" id="sdt" value="" required placeholder="số điện thoại"
                            type="text">
-                       <input class="w-full md:w-10/12 p-2 my-4 border focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-70 focus:border-blue-400 transition duration-300" id="email" value="" required placeholder="Địa chỉ email"
+                       <input class="w-full md:w-10/12 p-2 my-4 border focus:outline-none focus:ring focus:ring-blue-300  focus:border-blue-400 transition duration-300" id="email" value="" required placeholder="Địa chỉ email"
                            type="text"><br>
                        <input name="vai_tro" value="0" type="hidden">
                        <input name="kich_hoat" value="0" type="hidden">
@@ -65,7 +65,7 @@ const CartPage = {
            </div>
            </div>
             `
-        }else{
+        } else {
             return `
             <div class="text-center py-24 fade">
                 <div><i class="fas fa-shopping-bag text-6xl "></i></div>
@@ -76,9 +76,9 @@ const CartPage = {
         }
     },
     async afterRender() {
-       await Cart.delete();
-       await Cart.updateCart();
-       await Cart.checkout();
+        await Cart.delete();
+        await Cart.updateCart();
+        await Cart.checkout();
     }
 }
 export default CartPage;

@@ -69,12 +69,9 @@ export const displayError = (err) =>{
     `
  }
  export const isAdmin = async() => {
-    const userlocal = localStorage.getItem('user');
     const token = localStorage.getItem('token') ? localStorage.getItem('token') : null;
-    const {_id} = JSON.parse(userlocal)
-    if(_id) {
+    const userlocal = localStorage.getItem('user');
+    const {_id} = userlocal ? JSON.parse(userlocal): '';
         const {data} =  await UserAPI.profile(token,_id)
         return data;
-    }
-    
  }

@@ -6,7 +6,7 @@ const ListDetail = {
       const {id} = parseRequestUrl()
       const { data : Listdetails} = await OrderDetailApi.get(id)
         return /*html */ `
-        <table class="min-w-max w-full table-auto text-center shadow-md ">
+        <table class="min-w-max w-full table-auto text-center shadow-md fade1">
         <thead>
             <tr class="bg-white text-gray-600 uppercase text-sm leading-normal">
               <th class="py-3 px-6 font-medium">#</th>

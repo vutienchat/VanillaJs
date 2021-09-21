@@ -1,20 +1,20 @@
 import ProductApi from "../api/productAPI";
-import { $ , displayError} from "../utils";
+import { $, displayError } from "../utils";
 import firebase from "../firebase"
 import Category from "../components/Category.js";
 import Navbar from "../components/Navbar.js";
 import Sidebar from "../components/Sidebar";
 const ProductAddPage = {
     async render() {
-        window.scrollTo({ top: 0,left: 0 ,behavior: 'smooth' })
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
         return /*html*/ `
         <div x-data="{ sidebarOpen: false, darkMode: false }" :class="{ 'dark': darkMode }">
         <div class="flex h-screen bg-gray-100 dark:bg-gray-800 font-roboto">
            <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false"
                class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
-                   ${ await Sidebar.render()}
+                   ${await Sidebar.render()}
                    <div class="flex-1 flex flex-col overflow-hidden">
-                       ${ await Navbar.render()}
+                       ${await Navbar.render()}
                        <main id="list-product" class="flex-1 overflow-x-hidden overflow-y-auto p-4 fade">
                        <div id="error"></div>
                                 <form id="from-add"  class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -69,35 +69,35 @@ const ProductAddPage = {
      `
     },
     async afterRender() {
-        $('#from-add').addEventListener('submit',async e => {
+        $('#from-add').addEventListener('submit', async e => {
             e.preventDefault();
             const token = localStorage.getItem('token');
             const userlocal = localStorage.getItem('user');
-            const {_id} = userlocal ? JSON.parse(userlocal) : ' '
+            const { _id } = userlocal ? JSON.parse(userlocal) : ' '
             const fd = new FormData()
-            fd.append('name',$('#product-name').value)
-            fd.append('old_price',parseInt($('#product-old-price').value))
-            fd.append('new_price',parseInt($('#product-new-price').value))
-            fd.append('description',$('#product-description').value)
-            fd.append('classify',parseInt( document.querySelector('input[name="classify"]:checked').value))
-            fd.append('quantity',$('#product-quantity').value)
-            fd.append('photo',$('#product-image').files[0])
-            fd.append('category',$('#product-category').value)
+            fd.append('name', $('#product-name').value)
+            fd.append('old_price', parseInt($('#product-old-price').value))
+            fd.append('new_price', parseInt($('#product-new-price').value))
+            fd.append('description', $('#product-description').value)
+            fd.append('classify', parseInt(document.querySelector('input[name="classify"]:checked').value))
+            fd.append('quantity', $('#product-quantity').value)
+            fd.append('photo', $('#product-image').files[0])
+            fd.append('category', $('#product-category').value)
             try {
-               await ProductApi.add(fd ,token,_id);
-               await  swal({ 
+                await ProductApi.add(fd, token, _id);
+                await swal({
                     title: "Good job!",
                     text: "Thêm Sản Phẩm Thành Công",
                     icon: "success",
                 });
                 window.location.hash = '/admin/listproduct'
             } catch (err) {
-                
-                const {error} = err.response.data;
+
+                const { error } = err.response.data;
                 $('#error').innerHTML = displayError(error);
-                
+
             }
-            
+
         })
     }
 }

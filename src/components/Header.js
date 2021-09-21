@@ -215,6 +215,7 @@ const Header = {
                 localStorage.removeItem('user');
                 localStorage.removeItem('token');
                    reRender(this,'#header')
+                   window.location.hash =  `/`;
             })
         })
         const searchProducts = document.querySelectorAll('#form-seach-products');
